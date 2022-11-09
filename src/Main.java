@@ -1,23 +1,39 @@
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Main {
     private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        greetingCustomers();
-        chooseOption();
+     greetingCustomers();
+    chooseOption();
+
+
 
 
 
     }
 
-    public static void greetingCustomers() {
-        String companyName = "Sala Napoleońska";
+    private static void greetingCustomers() {
+        String companyName = "Sala Napoleonska";
         System.out.println("Welcome to the customer service of the " + companyName);
 
     }
 
-    public static void chooseOption() {
+    private static void printMenu() {
+        System.out.println("""
+                Please find the customer service menu below:
+                1 - print Instruction,
+                2 - add new customer,menu,type of event,email,
+                3 - update existing customer
+                4 - remove customer and menu and type of event
+                5 - make quotation
+                6 - print customer database
+                7 - stop registration
+                 """);
+    }
+
+    private static void chooseOption() {
         int option;
         boolean end = false;
 
@@ -54,102 +70,349 @@ public class Main {
         }
     }
 
-    public static void printMenu() {
-        System.out.println("Please find the customer service menu below");
-        System.out.println("1 - print Instruction");
-        System.out.println("2 - add new Customer, Menu, Type Of Event");
-        System.out.println("3 - update existing customer");
-        System.out.println("4 - remove Customer and Menu and Type Of Event");
-        System.out.println("5 - make quotation");
-        System.out.println("6 - print Customer Base");
-        System.out.println("7 - Stop registration\n");
-
+    public static int correctNumberOfYear(int year) {
+        int currentYear = currentYear();
+        while (year < currentYear) {
+            System.out.println("Current year is: " + currentYear + " it means that year has to be exactly " + currentYear + " or higher");
+            System.out.println("Please enter the correct number of year: ");
+            year = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return year;
     }
 
-    public static CustomerDataBase addBaseOfCustomer() {
+    private static int currentYear(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.YEAR);
+    }
+
+
+
+    private static CustomerDataBase addBaseOfCustomer() {
         System.out.println("Please enter the year for the database you are creating: ");
         int year = scanner.nextInt();
         scanner.nextLine();
-        correctNumberOfYear(year);
         return new CustomerDataBase(correctNumberOfYear(year));
     }
 
-    public static void addNewCustomer(CustomerDataBase baseOfCustomer) {
-        System.out.println("Please enter the customer's first and last name");
+    private static String emptyString(String nonEmptyString) {
+        while (nonEmptyString.equals("")) {
+            System.out.println("String is empty please enter non-empty name below:  ");
+            nonEmptyString = scanner.nextLine();
+        }
+        return nonEmptyString;
+    }
+
+
+    private static String getCustomerName() {
+
         String customerName = scanner.nextLine().toUpperCase();
-        customerName = emptyCustomerName(customerName);
-        System.out.println("Please enter the customer's phone number");
+        return emptyString(customerName);
+    }
+
+    private static String getEmail(CustomerDataBase customerDataBase) {
+        String email = scanner.nextLine();
+        email = emptyString(email);
+        while (customerDataBase.findContact(email) >= 0) {
+            System.out.println("""
+                    the customer with this e-mail is already in the database
+                    Please enter below correct e-mail:""");
+            email = scanner.nextLine();
+        }
+        return email;
+    }
+
+    private static String getPhoneNumber() {
+
         String phoneNumber = scanner.nextLine();
-        phoneNumber = emptyPhoneNumber(phoneNumber);
-        phoneNumber = correctPhoneNumber(phoneNumber);
-        Customer customer = new Customer(customerName, phoneNumber);
+        phoneNumber = emptyString(phoneNumber);
+        while (phoneNumber.length() != 9) {
+            System.out.println("Phone number must be exactly 9 digits long");
+            System.out.println("Please enter a valid phone number");
+            phoneNumber = scanner.nextLine();
+        }
+
+        return phoneNumber;
+    }
+
+    private static boolean leapYear(int year){
+        return year % 4 == 0 && year % 100 != 0 && year % 400 == 0;
+    }
+
+
+    private static int correctDayScope(String month) {
+        int upperBorder = 0;
+        switch (month){
+            case "JANUARY":
+            case "MAY":
+            case "MARCH":
+            case "JULY":
+            case "AUGUST":
+            case "DECEMBER":
+                upperBorder = 31;
+                break;
+            case "APRIL":
+            case "NOVEMBER":
+            case "JUNE":
+            case "SEPTEMBER":
+                upperBorder = 30;
+                break;
+        }
+
+        if (month.equals("FEBRUARY") && !leapYear(currentYear())) {
+            upperBorder = 28;
+        }
+
+        if (month.equals("FEBRUARY") && leapYear(currentYear())) {
+            upperBorder = 29;
+        }
+        return upperBorder;
+
+    }
+
+
+
+    private static int getDay(int upperBorder) {
+        int day = scanner.nextInt();
+        scanner.nextLine();
+        while (day < 1 || day > upperBorder) {
+            System.out.println("A day must be within the range 1-"+ upperBorder + " inclusive");
+            System.out.println("Please enter a correct value: ");
+            day = scanner.nextInt();
+            scanner.nextLine();
+        }
+
+        return day;
+    }
+
+    private static String getMonth(){
+        int option = scanner.nextInt();
+        scanner.nextLine();
+        while (option < 1 || option > 12) {
+            System.out.println("A month must be within the range 1-12 inclusive");
+            System.out.println("Please enter a correct value: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
+        }
+        String month = "";
+        switch (option) {
+            case 1:
+                month = "JANUARY";
+                break;
+            case 2:
+                month = "FEBRUARY";
+                break;
+            case 3:
+                month = "MARCH";
+                break;
+            case 4:
+                month = "APRIL";
+                break;
+            case 5:
+                month = "MAY";
+                break;
+            case 6:
+                month = "JUNE";
+                break;
+            case 7:
+                month = "JULY";
+                break;
+            case 8:
+                month = "AUGUST";
+                break;
+            case 9:
+                month = "SEPTEMBER";
+                break;
+            case 10:
+                month = "OCTOBER";
+                break;
+            case 11:
+                month = "NOVEMBER";
+                break;
+            case 12:
+                month = "DECEMBER";
+                break;
+        }
+        return month;
+    }
+
+
+
+    private static DateOfTheEvent getDate(CustomerDataBase customerDataBase) {
+
+        System.out.println("""
+        Please enter the month with numbers.
+        LEGEND:
+        1 = JANUARY --> 12 = DECEMBER
+        Month:""");
+        String month = getMonth();
+
+        System.out.println("Please enter the day with numbers. Day: ");
+        int day = getDay(correctDayScope(month));
+
+
+        while (customerDataBase.findDate(month, day) == null) {
+            System.out.println("""
+                    This date is already taken, please select another one
+                    Please enter below the correct date:""");
+            System.out.println("Please enter the another month with numbers. Month: ");
+            month = getMonth();
+
+            System.out.println("Please enter the other day with numbers. Day: ");
+            day = getDay(correctDayScope(month));
+
+        }
+        return customerDataBase.findDate(month, day);
+    }
+
+
+    private static String getTypeOfEvent() {
+
+        String nameOfEvent = scanner.nextLine().toUpperCase();
+        return emptyString(nameOfEvent);
+    }
+
+
+    private static int lowerBorderNumberOfPeople(){
+        System.out.println("Please enter a new lower limit below: ");
+        int lowerBorder = scanner.nextInt();
+        scanner.nextLine();
+        return lowerBorder;
+    }
+
+    private static int upperBorderNumberOfPeople(int lowerBorder){
+        System.out.println("Please enter a new upper limit below: ");
+        int upperBorder = scanner.nextInt();
+        scanner.nextLine();
+        while (lowerBorder>=upperBorder){
+            System.out.println("""
+        Lower limit is greater than the upper limit.
+        Please enter below correct upper limit:""");
+            upperBorder = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return upperBorder;
+    }
+
+    private static int [] settingProperNumberOfPeopleScope(){
+        int [] outputArray = new int[2];
+        int upperBorder;
+        int lowerBorder;
+        System.out.println("""
+                The default range is 50-180 inclusive.
+                Do you want to set a number of people new range?
+                If yes please enter "yes".
+                If not please enter "no" below.""");
+
+        String newScope = scanner.nextLine().toUpperCase();
+        newScope = emptyString(newScope);
+
+        if (newScope.equals("YES")){
+            lowerBorder = lowerBorderNumberOfPeople();
+            upperBorder = upperBorderNumberOfPeople(lowerBorder);
+        }
+        else {
+            lowerBorder = 50;
+            upperBorder = 180;
+        }
+
+        outputArray[0] = lowerBorder;
+        outputArray[1] = upperBorder;
+
+        return outputArray;
+    }
+
+
+
+
+    private static int getNumberOfPeople(int [] inputArray) {
+        int lowerBorder = inputArray[0];
+        int upperBorder = inputArray[1];
+
+        int numberOfPeople = scanner.nextInt();
+        scanner.nextLine();
+        while (numberOfPeople < lowerBorder || numberOfPeople > upperBorder) {
+            System.out.println("Number of people must be within the range " + lowerBorder +"-" + upperBorder  + " inclusive");
+            System.out.println("Please enter the correct number of people: ");
+            numberOfPeople = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return numberOfPeople;
+    }
+
+    private static int getOption() {
+
+        int option = scanner.nextInt();
+        scanner.nextLine();
+
+        while (option < 1 || option > 3) {
+            System.out.println("Number of option must be within the range 1-3 inclusive");
+            System.out.println("Please enter correct number of option: ");
+            option = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return option;
+    }
+
+
+    private static void contentMenu() {
+
+        for (int i = 1; i <= 3; i++) {
+            Menu menu = new Menu(i);
+            System.out.println(menu + "\n");
+        }
+    }
+
+
+    private static void addNewCustomer(CustomerDataBase baseOfCustomer) {
+        System.out.println("Please enter the customer's email");
+        String email = getEmail(baseOfCustomer);
+
+        System.out.println("Please enter the customer's first and last name");
+        String customerName = getCustomerName();
+
+        System.out.println("Please enter the customer's phone number");
+        String phoneNumber = getPhoneNumber();
+
+        Customer customer = new Customer(customerName, phoneNumber, email);
         baseOfCustomer.addCustomer(customer);
 
         System.out.println("Please enter the date that the customer is interested in");
-        System.out.println("Please enter the day with numbers. Day: ");
-        int day = scanner.nextInt();
-        scanner.nextLine();
-        day = correctNumberOfDay(day);
-        System.out.println("Please enter the month in words. Month: ");
+        DateOfTheEvent dateOfTheEvent = getDate(baseOfCustomer);
 
-        String month = scanner.nextLine().toUpperCase();
-        month = emptyMonth(month);
-
-
-        baseOfCustomer.addDate(month, day, customer);
-
-
+        baseOfCustomer.addDate(dateOfTheEvent, customer);
 
         System.out.println("Please specify the type of event");
-        String nameOfEvent = scanner.nextLine();
-        nameOfEvent = emptyTypeOfEvent(nameOfEvent);
+        String typeOfEvent = getTypeOfEvent();
+
+        int [] numberOfPeopleRange = settingProperNumberOfPeopleScope();
+
         System.out.println("Please specify the number of people");
-        int numberOfPeople = scanner.nextInt();
-        scanner.nextLine();
-        numberOfPeople = correctNumberOfPeople(numberOfPeople);
+        int numberOfPeople = getNumberOfPeople(numberOfPeopleRange);
 
-
-        baseOfCustomer.addTypeOfEvent(nameOfEvent, numberOfPeople, customer);
+        baseOfCustomer.addTypeOfEvent(typeOfEvent, numberOfPeople, customer);
 
         System.out.println("Please find available options of the menu below \n");
         contentMenu();
-        System.out.println("Please enter customer's choice");
-        int option = scanner.nextInt();
-        scanner.nextLine();
-        option = correctNumberOfOption(option);
+        System.out.println("Please enter the customer's choice: ");
+        int option = getOption();
 
         baseOfCustomer.addMenu(option, customer);
 
     }
 
-    public static void contentMenu() {
-
-        System.out.println("Option number 1 has price 55.67 zloty and includes: ");
-        System.out.println("1.Chicken Soup\n" + "2.Beetroot soup with dumplings\n" + "3.Red borscht with patty\n");
 
 
-        System.out.println("Option number 2 has price 74.21 zloty and includes: ");
-        System.out.println("1.Chicken Soup\n" + "2.Beetroot soup with dumplings\n" + "3.Red borscht with patty\n" +
-                "4.Hunter's stew\n" + "5.Cheese cake\n");
-
-        System.out.println("Option number 3 has price 89.34 zloty and includes: ");
-        System.out.println("1.Chicken Soup\n" + "2.Beetroot soup with dumplings\n" + "3.Red borscht with patty\n" +
-                "4.Hunter's stew\n" + "5.Cheese cake\n" + "6.Coca cola\n");
-    }
-
-
-    public static void removeCustomer(CustomerDataBase baseOfCustomer) {
-
-        System.out.println("Please enter the customer's first and last name to be removed");
-        String customerName = scanner.nextLine().toUpperCase();
-        customerName = emptyCustomerName(customerName);
-        customerName = wrongCustomerName(customerName,baseOfCustomer);
-        Customer customer = baseOfCustomer.queryCustomer(customerName);
+    private static void removeCustomer(CustomerDataBase baseOfCustomer) {
+        System.out.println("Please enter the customer's email to be removed");
+        String customerMail = wrongCustomerEmail(baseOfCustomer);
+        Customer customer = baseOfCustomer.queryCustomer(customerMail);
         baseOfCustomer.removeCustomerAndMenuAndTypeOfEvent(customer);
     }
 
-    public static void printCustomerBase(CustomerDataBase baseOfCustomer) {
-        if (baseOfCustomer.getCustomerMenuBase().size() == 0 && baseOfCustomer.getCustomersBase().size() == 0 && baseOfCustomer.getCustomerTypeOfEventBase().size() == 0) {
+
+    private static void printCustomerBase(CustomerDataBase baseOfCustomer) {
+        if (baseOfCustomer.getCustomersBase().size() == 0) {
             System.out.println("Customer Base is empty");
             System.out.println("Please add items");
         }
@@ -161,150 +424,84 @@ public class Main {
             System.out.println((baseOfCustomer.getYear()));
             System.out.println(baseOfCustomer.getCustomerMenuBase().get(i));
             System.out.println(baseOfCustomer.getCustomerTypeOfEventBase().get(i));
-            System.out.println("Total Cost: " + Math.round(baseOfCustomer.getCustomerTypeOfEventBase().get(i).getPeopleQty() * baseOfCustomer.getCustomerMenuBase().get(i).getPrice()) + " zloty");
+            System.out.println("Total Cost: " + Math.round(baseOfCustomer.getCustomerTypeOfEventBase().get(i).getPeopleQty() * baseOfCustomer.getCustomerMenuBase().get(i).getPrice()) + " zloty" + "\n");
         }
     }
 
 
-    public static int correctNumberOfPeople(int numberOfPeople) {
-        while (numberOfPeople < 50 || numberOfPeople > 180) {
-            System.out.println("Number of people must be within the range 50-180 inclusive");
-            System.out.println("Please enter the correct number of people: ");
-            numberOfPeople = scanner.nextInt();
-            scanner.nextLine();
-        }
-        return numberOfPeople;
-    }
 
-    public static int correctNumberOfDay(int dayNumber) {
-        while (dayNumber<1 || dayNumber>31) {
-            System.out.println("A day must be within the range 1-31 inclusive");
-            System.out.println("Please enter a correct value: ");
-            dayNumber = scanner.nextInt();
-            scanner.nextLine();
-        }
-        return dayNumber;
-    }
 
-    public static int correctNumberOfYear(int year) {
-        while (year < 2022) {
-            System.out.println("Current year is 2022, it means that year has to be exactly 2022 or higher");
-            System.out.println("Please enter the correct number of year: ");
-            year = scanner.nextInt();
-            scanner.nextLine();
-        }
-        return year;
-    }
 
-    public static int correctNumberOfOption(int option) {
-        while (option < 1 || option > 3) {
-            System.out.println("Number of option must be within the range 1-3 inclusive");
-            System.out.println("Please enter correct number of people: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
-        }
-        return option;
-    }
 
-    public static String correctPhoneNumber (String phoneNumber) {
-        while (phoneNumber.length() != 9) {
-            System.out.println("Phone number must be excatly 9 digits long");
-            System.out.println("Please enter a valid phone number");
-            phoneNumber = scanner.nextLine();
-        }
-        return phoneNumber;
-    }
 
     public static void updateCustomer(CustomerDataBase baseOfCustomer) {
-        System.out.println("Please enter the customer's first and last name to be updated below: ");
-        String oldCustomerName = scanner.nextLine().toUpperCase();
-        oldCustomerName = emptyCustomerName(oldCustomerName);
-        oldCustomerName = wrongCustomerName(oldCustomerName,baseOfCustomer);
-        System.out.println("Please enter the new customer's first and last name below: ");
-        String newCustomerName = scanner.nextLine().toUpperCase();
-        newCustomerName = emptyCustomerName(newCustomerName);
-        System.out.println("Please enter a new phone number below: ");
-        String newCustomerPhoneNumber = scanner.nextLine();
-        newCustomerPhoneNumber = emptyPhoneNumber(newCustomerPhoneNumber);
-        newCustomerPhoneNumber = correctPhoneNumber(newCustomerPhoneNumber);
-        Customer customerToChange = new Customer(newCustomerName, newCustomerPhoneNumber);
-        baseOfCustomer.getCustomersBase().set(baseOfCustomer.findContact(oldCustomerName), customerToChange);
+        System.out.println("Please enter the customer's email below to verify that it is in database: ");
+        String oldCustomerEmail = wrongCustomerEmail(baseOfCustomer);
 
+        System.out.println("Please enter the new customer's email below: ");
+        String newCustomerEmail = getEmail(baseOfCustomer);
+
+        System.out.println("Please enter the new customer's first and last name below: ");
+        String newCustomerName = getCustomerName();
+
+        System.out.println("Please enter a new phone number below: ");
+        String newCustomerPhoneNumber = getPhoneNumber();
+
+        Customer customerToChange = new Customer(newCustomerName, newCustomerPhoneNumber, newCustomerEmail);
+        baseOfCustomer.getCustomersBase().set(baseOfCustomer.findContact(oldCustomerEmail), customerToChange);
+
+
+        System.out.println("Please enter the new date below");
+        DateOfTheEvent newDateOfTheEvent = getDate(baseOfCustomer);
+        baseOfCustomer.getCustomerDateBase().set(baseOfCustomer.findContact(customerToChange.getEmail()), newDateOfTheEvent);
+
+
+        System.out.println("Please find available options of the menu below \n");
+        contentMenu();
 
         System.out.println("Please enter a new menu option below: ");
-        int option = scanner.nextInt();
-        scanner.nextLine();
-        option = correctNumberOfOption(option);
+        int option = getOption();
         Menu menuToChange = new Menu(option);
-        baseOfCustomer.getCustomerMenuBase().set(baseOfCustomer.findContact(customerToChange.getName()), menuToChange);
-
+        baseOfCustomer.getCustomerMenuBase().set(baseOfCustomer.findContact(customerToChange.getEmail()), menuToChange);
 
         System.out.println("Please enter a new type of event below: ");
-        String typeOfEventNewName = scanner.nextLine();
-        typeOfEventNewName = emptyTypeOfEvent(typeOfEventNewName);
+        String typeOfEventNewName = getTypeOfEvent();
+
+        int [] numberOfPeopleRange = settingProperNumberOfPeopleScope();
         System.out.println("Please enter a new number of people below: ");
-        int numberOfPeople = scanner.nextInt();
-        scanner.nextLine();
-        numberOfPeople = correctNumberOfPeople(numberOfPeople);
+        int numberOfPeople = getNumberOfPeople(numberOfPeopleRange);
+
         TypeOfEvent typeOfEvent = new TypeOfEvent(typeOfEventNewName, numberOfPeople);
 
-        baseOfCustomer.getCustomerTypeOfEventBase().set(baseOfCustomer.findContact(customerToChange.getName()), typeOfEvent);
+        baseOfCustomer.getCustomerTypeOfEventBase().set(baseOfCustomer.findContact(customerToChange.getEmail()), typeOfEvent);
 
-        System.out.println("Customer: " + oldCustomerName + " was successfully updated");
-        System.out.println("New first and last name is: " + newCustomerName);
+        System.out.println("Customer with e-mail: " + oldCustomerEmail + " was successfully updated");
+
     }
 
     public static void quotation(CustomerDataBase baseOfCustomer) {
-        System.out.println("In order to make quotation please enter first and last name ");
-        String customerName = scanner.nextLine();
-        customerName = emptyCustomerName(customerName);
-        customerName = wrongCustomerName(customerName,baseOfCustomer);
-        Customer customer = baseOfCustomer.queryCustomer(customerName);
-        int customerPosition = baseOfCustomer.findContact(customer.getName());
+        System.out.println("In order to make quotation please enter customer's e-mail below: ");
+        String customerMail = wrongCustomerEmail(baseOfCustomer);
+        Customer customer = baseOfCustomer.queryCustomer(customerMail);
+
+        int customerPosition = baseOfCustomer.findContact(customer.getEmail());
         int numberOfPeople = baseOfCustomer.getCustomerTypeOfEventBase().get(customerPosition).getPeopleQty();
         double price = baseOfCustomer.getCustomerMenuBase().get(customerPosition).getPrice();
-        double quatation = numberOfPeople * price;
+
+        double quotation = numberOfPeople * price;
+
         System.out.println("The menu option that has been selected has a price: " + price + " zloty");
         System.out.println("Number of People selected by the client: " + numberOfPeople + " people");
-        System.out.println("Total cost for " + customer.getName() + " is " + Math.round(quatation) + " zloty");
-    }
-    public static String emptyCustomerName(String customerName){
-        while (customerName.equals("")){
-            System.out.println("Customer's first and last name is empty, please enter non-empty name below:  ");
-            customerName = scanner.nextLine();
-        }
-        return customerName;
+        System.out.println("Total cost for " + customer.getName() + " with e-mail: " + customer.getEmail() + " is " + Math.round(quotation) + " zloty");
     }
 
-    public static String emptyPhoneNumber (String phoneNumber){
-        while (phoneNumber.equals("")){
-            System.out.println("Customer's phone number is empty please enter non-empty phone number below:  ");
-            phoneNumber = scanner.nextLine();
-        }
-        return phoneNumber;
-    }
 
-    public static String emptyMonth (String month){
-        while (month.equals("")){
-            System.out.println("Month field is empty please enter non-empty name below:  ");
-            month = scanner.nextLine();
+    public static String wrongCustomerEmail(CustomerDataBase baseOfCustomer) {
+        String customerMail = scanner.nextLine();
+        while (baseOfCustomer.findContact(customerMail) < 0) {
+            System.out.println("Customer with e-mail: " + customerMail + " is not a customer database please enter below correct e-mail:  ");
+            customerMail = scanner.nextLine();
         }
-        return month;
-    }
-
-    public static String emptyTypeOfEvent (String typeOfEvent){
-        while (typeOfEvent.equals("")){
-            System.out.println("Type of Event name is empty please enter  non-empty name below:  ");
-            typeOfEvent = scanner.nextLine();
-        }
-        return typeOfEvent;
-    }
-
-    public static String wrongCustomerName(String customerName,CustomerDataBase baseOfCustomer){
-        while (baseOfCustomer.findContact(customerName) < 0) {
-            System.out.println("Customer " + customerName + " is not a customer base please enter below correct name and surname:  ");
-            customerName = scanner.nextLine();
-        }
-        return customerName;
+        return customerMail;
     }
 }
