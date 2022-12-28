@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -55,49 +56,66 @@ public class Validation {
 
 
     public String correctMonth(int option) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM");
+        Calendar calendar = Calendar.getInstance();
+
         while (option < 1 || option > 12) {
             System.out.println("A month must be within the range 1-12 inclusive");
             System.out.println("Please enter a correct value: ");
             option = scanner.nextInt();
             scanner.nextLine();
         }
+
+
         String month = "";
         switch (option) {
             case 1:
-                month = "JANUARY";
+                calendar.set(Calendar.MONTH, 0);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 2:
-                month = "FEBRUARY";
+                calendar.set(Calendar.MONTH, 1);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 3:
-                month = "MARCH";
+                calendar.set(Calendar.MONTH, 2);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 4:
-                month = "APRIL";
+                calendar.set(Calendar.MONTH, 3);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 5:
-                month = "MAY";
+                calendar.set(Calendar.MONTH, 4);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 6:
-                month = "JUNE";
+                calendar.set(Calendar.MONTH, 5);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 7:
-                month = "JULY";
+                calendar.set(Calendar.MONTH, 6);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 8:
-                month = "AUGUST";
+                calendar.set(Calendar.MONTH, 7);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 9:
-                month = "SEPTEMBER";
+                calendar.set(Calendar.MONTH, 8);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 10:
-                month = "OCTOBER";
+                calendar.set(Calendar.MONTH, 9);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 11:
-                month = "NOVEMBER";
+                calendar.set(Calendar.MONTH, 10);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
             case 12:
-                month = "DECEMBER";
+                calendar.set(Calendar.MONTH, 11);
+                month = dateFormat.format(calendar.getTime()).toUpperCase();
                 break;
         }
         return month;
@@ -246,3 +264,4 @@ public class Validation {
     }
 
 }
+

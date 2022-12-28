@@ -30,13 +30,14 @@ public class Main {
                  """);
     }
 
+
+
     private static void chooseOption() {
         int option;
         boolean end = false;
         Validation validation = new Validation();
         CustomerDataBase baseOfCustomer = addBaseOfCustomer(validation);
         System.out.println(baseOfCustomer + " is already created\n");
-
         printMenu();
         while (!end) {
             option = scanner.nextInt();

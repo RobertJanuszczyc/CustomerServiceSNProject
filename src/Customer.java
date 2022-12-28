@@ -25,3 +25,4 @@ public class Customer {
         return name.toUpperCase() + "\n" + "Phone Number: " + phoneNumber + "\n" + "Email: " + email;
     }
 }
+
