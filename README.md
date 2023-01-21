@@ -219,9 +219,133 @@ public class CustomerDataBase {
 
 ```
 The most important methods in the CustomerDataBase class are:
--findContact(A method that checks whether a contact is registered in the database),
--addCustomer (method, which will add an object from the Customer class to the appropriate ArrayList),
--addTypeOfEvent (method, which will add an object from the TypeOfEvent class to the appropriate ArrayList),
--
+
+findContact(A method that checks whether a contact is registered in the araylist database),
+```java
+public int findContact(String mail) {
+        for (int i = 0; i < customersBase.size(); i++) {
+            Customer customer = customersBase.get(i);
+            if (customer.getEmail().equals(mail)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+```
+
+findDate(A method that checks whether a date is registered in the araylist database, whether the date is occupied),
+```java
+public DateOfTheEvent findDate(String month, int day) {
+        DateOfTheEvent dateOfTheEvent = new DateOfTheEvent(day, month);
+        for (int i = 0; i < getCustomerDateBase().size(); i++) {
+            dateOfTheEvent = getCustomerDateBase().get(i);
+            if (dateOfTheEvent.getMonth().equals(month) && dateOfTheEvent.getDay() == day) {
+                return null;
+            } else dateOfTheEvent = new DateOfTheEvent(day, month);
+        }
+        return dateOfTheEvent;
+
+    }
+```    
+addCustomer (method, which will add an object from the Customer class to the appropriate ArrayList),
+```java
+public void addCustomer(Customer customer) {
+
+        if (findContact(customer.getEmail()) < 0) {
+            customersBase.add(customer);
+            System.out.println("Customer: " + customer.getName() + " with email: " + customer.getEmail() + " was successfully added\n");
+        }
+
+    }
+```    
+addTypeOfEvent (method, which will add an object from the TypeOfEvent class to the appropriate ArrayList),
+```java
+public void addTypeOfEvent(String nameOfEvent, int numberOfPeople, Customer customer) {
+
+        if (findContact(customer.getEmail()) >= 0) {
+            customerTypeOfEventBase.add(findContact(customer.getEmail()), new TypeOfEvent(nameOfEvent, numberOfPeople));
+            System.out.println(nameOfEvent + " for " + customer.getName() + " for " + numberOfPeople + " people" + " was successfully saved\n");
+        } else {
+            customerIsNotInTheBase();
+        }
+    }
+```    
+addMenu (method, which will add an object from the Menu class to the appropriate ArrayList),
+```java
+public void addMenu(int option, Customer customer) {
+        if (findContact(customer.getEmail()) >= 0) {
+            customerMenuBase.add(findContact(customer.getEmail()), new Menu(option));
+            System.out.println("Menu for " + customer.getName().toUpperCase() + " with email " + customer.getEmail() + " was successfully added\n");
+        } else {
+            customerIsNotInTheBase();
+        }
+    }
+```    
+addDate (method, which will add an object from the DateOfTheEvent class to the appropriate ArrayList),
+```java
+ public void addDate(DateOfTheEvent dateOfTheEvent, Customer customer) {
+        if (findContact(customer.getEmail()) >= 0) {
+            customerDateBase.add(findContact(customer.getEmail()), dateOfTheEvent);
+            System.out.println("Date: " + dateOfTheEvent.getDay() + " " + dateOfTheEvent.getMonth() + " for " + customer.getName() + " with email " + customer.getEmail() + " was successfully saved\n");
+        } else {
+            customerIsNotInTheBase();
+        }
+    }
+```    
+-removeCustomerAndMenuAndTypeOfEvent (method that will remove the objects of the Customer, TypeOfEvent, Menu, DateOfTheEvent classes from the specific arraylists).
+```java
+public void removeCustomerAndMenuAndTypeOfEvent(Customer customer) {
+
+        if (findContact(customer.getEmail()) >= 0) {
+            int position = findContact(customer.getEmail());
+            customerMenuBase.remove(position);
+            customerTypeOfEventBase.remove(position);
+            customersBase.remove(position);
+            customerDateBase.remove(position);
+            System.out.println("Customer: " + customer.getName() + " with email: " + customer.getEmail() + " was successfully removed");
+
+        } else {
+            customerIsNotInTheBase();
+        }
+    }
+
+    private static void customerIsNotInTheBase() {
+        System.out.println("The customer is not in the database\n");
+    }
+```    
+In the main class such methods were created as:
+addBaseOfCustomer (The method responsible for creating the database in a given year),
+```java
+private static CustomerDataBase addBaseOfCustomer(Validation validation) {
+        System.out.println("Please enter the year for the database you are creating: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+        return new CustomerDataBase(validation.correctNumberOfYear(year));
+    }
+```
+getCustomerName (method that uses methods from the scanner class and allows the user to enter the name of the client ).
+```java
+private static String getCustomerName(Validation validation) {
+
+        String customerName = scanner.nextLine().toUpperCase();
+        return validation.emptyString(customerName);
+    }
+```
+getEmail (method that allows the user to enter the email of the client).
+```java
+private static String getEmail(CustomerDataBase customerDataBase, Validation validation) {
+        String email = scanner.nextLine();
+        email = validation.emptyString(email);
 
 
+        return validation.correctCustomerEmail(customerDataBase, email);
+    }
+```
+getPhoneNumber (method that allows the user to enter the phone number of the client).
+```java
+private static String getPhoneNumber(Validation validation) {
+        String phoneNumber = scanner.nextLine();
+        phoneNumber = validation.emptyString(phoneNumber);
+        return validation.correctPhoneNumber(phoneNumber);
+    }
+```    
