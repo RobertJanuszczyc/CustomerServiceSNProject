@@ -175,5 +175,53 @@ The Menu class also has an override method toString, which was created to displa
 ```
 The next stage was to create a CustomerDataBase class with ArrayList fields storing objects from the Customer, TypeOfEvent, DateOfEvent, Menu classes.
 In this class there is also a field referring to the year of the database (database stores customer data for one designated year). 
+A constructor and getters have been created for fields.
+```java
+public class CustomerDataBase {
+    private final ArrayList<Customer> customersBase;
+    private final int year;
+
+    private final ArrayList<Menu> customerMenuBase;
+    private final ArrayList<TypeOfEvent> customerTypeOfEventBase;
+
+    private final ArrayList<DateOfTheEvent> customerDateBase;
+
+
+    public CustomerDataBase(int year) {
+        this.customersBase = new ArrayList<>();
+        this.year = year;
+        this.customerMenuBase = new ArrayList<>();
+        this.customerTypeOfEventBase = new ArrayList<>();
+        this.customerDateBase = new ArrayList<>();
+    }
+
+    public ArrayList<Menu> getCustomerMenuBase() {
+        return customerMenuBase;
+    }
+
+
+    public ArrayList<Customer> getCustomersBase() {
+        return customersBase;
+    }
+
+
+    public ArrayList<TypeOfEvent> getCustomerTypeOfEventBase() {
+        return customerTypeOfEventBase;
+    }
+
+    public ArrayList<DateOfTheEvent> getCustomerDateBase() {
+        return customerDateBase;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+```
+The most important methods in the CustomerDataBase class are:
+-findContact(A method that checks whether a contact is registered in the database),
+-addCustomer (method, which will add an object from the Customer class to the appropriate ArrayList),
+-addTypeOfEvent (method, which will add an object from the TypeOfEvent class to the appropriate ArrayList),
+-
 
 
