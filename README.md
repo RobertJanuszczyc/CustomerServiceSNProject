@@ -827,3 +827,76 @@ private static void printCustomerBase(CustomerDataBase baseOfCustomer) {
         }
     }
 ```
+# Running application
+
+## Prerequisite
+If you want to run the application, java version 19.01 or later is required.                                             
+Please find below link to a tutorial on how to properly install the above java version:                                                 
+https://www.youtube.com/watch?v=vFBW6nMcVlU                                                                   
+To download, follow the link below:                                                                                                                                                                      
+https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html                                                    
+
+## Launch process
+Download a file named launcher.jar from the DateZoneProject repository located on GitHub.                                                
+
+![thirdImage](https://user-images.githubusercontent.com/116492421/213838445-951ddd34-beec-4ca4-a54f-3efa83f1f0b4.PNG)
+
+Then save it to a specific location on your computer.                                            
+On my computer, the file is located in:                                                    
+C:\Users\Robert\IdeaProjects\DateZoneProject\src                                       
+
+Open the console by typing cmd at the command line.                                            
+
+![image](https://user-images.githubusercontent.com/116492421/213838763-a28abb59-9ec9-4402-9801-344a4e5116b1.png)
+
+In the next step, type the following command in the console:                                                   
+java -jar launcher.jar                                                                   
+After typing the command, the program should start in the console.                                              
+
+![carbon](https://user-images.githubusercontent.com/116492421/213839258-2802c72c-d459-4c00-b920-3696805aa747.png)
+
+# Application Development                                                      
+
+## Prerequisite                                                     
+If you want to develop the application necessary will be                                                
+-	java version 19.01,
+-	IntelliJ IDEA Community Edition 2022.1*.
+
+
+Please find below link to a tutorial on how to properly install the above IntelliJ IDEA version:                                              
+https://www.youtube.com/watch?v=S8cVBE4euus                                                          
+To download, follow the link below:                                                         
+https://www.jetbrains.com/idea/download/#section=windows                                                     
+
+![thirdImage](https://user-images.githubusercontent.com/116492421/213839484-02317d47-3c3c-4e1c-aec6-fa9067d12a4c.PNG)
+
+
+## Project Openning
+
+Download the zip folder from the DateZoneProject repository with the project files.                                                           
+
+![image](https://user-images.githubusercontent.com/116492421/213839520-4df8eea9-c05b-41ef-9598-f27baecc08c6.png)
+
+
+Then save and extract project files to a specific location on your computer.                                                       
+On my computer, the file is located in:                                                                        
+C:\NewProject                                                                                       
+
+![carbon](https://user-images.githubusercontent.com/116492421/213839561-8355aa13-bd94-4edc-8490-91b0c31a145f.png)
+
+
+The next step is to click open in IntelliJ IDEA.                                                               
+
+![carbon](https://user-images.githubusercontent.com/116492421/213839585-35f9352f-ae52-4ca1-b03a-9747a9d8fc16.png)
+
+
+Then select the appropriate folder with the project.                                                                        
+
+![carbon](https://user-images.githubusercontent.com/116492421/213839609-4ae90b8a-619c-4111-a6a5-94ba9d86db7b.png)
+
+
+After selecting the appropriate folder, a project should open.                                                                            
+We can start to make changes.                                                                                    
+
+
+![carbon](https://user-images.githubusercontent.com/116492421/213839656-028c5911-c952-468a-af6b-56b9a558867f.png)
