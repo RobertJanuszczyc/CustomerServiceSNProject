@@ -845,13 +845,14 @@ To download, follow the link below:
 https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html                                                    
 
 ## Launch process
-Download a file named launcher.jar from the DateZoneProject repository located on GitHub.                                                
+Download a file named launcher.jar from the CustomerServiceProject repository located on GitHub.                                                
 
-![thirdImage](https://user-images.githubusercontent.com/116492421/213838445-951ddd34-beec-4ca4-a54f-3efa83f1f0b4.PNG)
+![carbon](https://user-images.githubusercontent.com/116492421/213926408-5ce4521e-b109-4c3c-9d65-56c9de0da732.png)
+
 
 Then save it to a specific location on your computer.                                            
 On my computer, the file is located in:                                                    
-C:\Users\Robert\IdeaProjects\DateZoneProject\src                                       
+C:\Users\Robert\IdeaProjects\CustomerServiceProject\src
 
 Open the console by typing cmd at the command line.                                            
 
@@ -861,7 +862,7 @@ In the next step, type the following command in the console:
 java -jar launcher.jar                                                                   
 After typing the command, the program should start in the console.                                              
 
-![carbon](https://user-images.githubusercontent.com/116492421/213839258-2802c72c-d459-4c00-b920-3696805aa747.png)
+![firstImage](https://user-images.githubusercontent.com/116492421/213927248-3f573419-7621-43d8-b3b9-cbbcb1b379be.PNG)
 
 # Application Development                                                      
 
