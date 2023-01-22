@@ -1,4 +1,4 @@
-# CustomerServiceSNProject
+![carbon](https://user-images.githubusercontent.com/116492421/213929391-882c40f0-6b0d-4e1e-b2a5-9c17f21aeb50.png)
 # Introduction
 In this project I have wanted to show that knowing the basics of object-oriented programming, we are able to create a simple console application for customer service.
 The application was created with the use:
@@ -28,8 +28,8 @@ Once entered, the database will contain such information as:
 Functionality of the application, will improve the operation of any wedding hall !!!
 
 # Creation Process
-The first step was the creation of 4 classes Customer, TypeOfEvent, DateOfEvent, Menu.                                                    
-The customer class with the fields assigned to it represented general information about the customer.                                                       
+The first step was the creation of 4 classes **Customer**, **TypeOfEvent**, **DateOfEvent**, **Menu**.                                                    
+The **Customer** class with the fields assigned to it represented general information about the customer.                                                       
 Please find below these fields:                                               
 - name (first and last name),
 - phone number,
@@ -58,14 +58,14 @@ public Customer(String name, String phoneNumber, String email) {
     }
 ```
 
-The Customer class has an override method toString, which was created to display general information about the customer.
+The **Customer** class has an override method **toString**, which was created to display general information about the customer.
 ```java
 @Override
     public String toString() {
         return name.toUpperCase() + "\n" + "Phone Number: " + phoneNumber + "\n" + "Email: " + email;
     }
 ```
-The TypeOfEvent class and fields belonging to it allowed to collect necessary information about the type of event and number of people.
+The **TypeOfEvent** class and fields belonging to it allowed to collect necessary information about the type of event and number of people.
 ```java
 public class TypeOfEvent {
     private final String name;
@@ -81,7 +81,7 @@ public class TypeOfEvent {
         return peopleQty;
     }
 ```    
-The TypeOfEvent class  has an override method toString, which was created to provide information about the type of event and number of people.
+The **TypeOfEvent** class  has an override method **toString**, which was created to provide information about the type of event and number of people.
 ``` java
  @Override
     public String toString() {
@@ -89,7 +89,7 @@ The TypeOfEvent class  has an override method toString, which was created to pro
     }
 ```    
 
-The DateOfEvent class and fields belonging to it allowed to gather information about the month and day on which the event is to be held.
+The **DateOfEvent** class and fields belonging to it allowed to gather information about the month and day on which the event is to be held.
 ```java
 public class DateOfTheEvent {
     private final int day;
@@ -108,14 +108,14 @@ public class DateOfTheEvent {
         return day;
     }
 ```
-The DateOfEvent class  has an override method toString, which was created to provide information about the day and month of the event.
+The **DateOfEvent** class  has an override method **toString**, which was created to provide information about the day and month of the event.
 ```java
  @Override
     public String toString() {
         return "Date: " + day + " " + month.toUpperCase();
     }
 ```
-The Menu class and fields belonging to it allowed to collect information about the menu option, name, price and list of dishes.
+The **Menu** class and fields belonging to it allowed to collect information about the menu option, name, price and list of dishes.
 ```java
 public class Menu {
     private String name;
@@ -165,7 +165,7 @@ public class Menu {
     }
 ```
 
-The Menu class also has an override method toString, which was created to display information about the menu selected by the customer.
+The **Menu** class also has an override method **toString**, which was created to display information about the menu selected by the customer.
 ```java
 @Override
     public String toString() {
@@ -174,7 +174,7 @@ The Menu class also has an override method toString, which was created to displa
     }
 ```
 
-The next stage was to create a CustomerDataBase class with ArrayList fields storing objects from the Customer, TypeOfEvent, DateOfEvent, Menu classes.             
+The next stage was to create a **CustomerDataBase** class with ArrayList fields storing objects from the **Customer**, **TypeOfEvent**, **DateOfEvent**, **Menu** classes.             
 In this class there is also a field referring to the year of the database (database stores customer data for one designated year).                                 
 A constructor and getters have been created for fields.
 
@@ -220,9 +220,9 @@ public class CustomerDataBase {
     }
 
 ```
-The most important methods in the CustomerDataBase class are:
+The most important methods in the **CustomerDataBase** class are:
 
-- findContact (A method that checks if the customer is registered in the araylist database, if so, the method returns its index in the arraylist),
+- **findContact** (A method that checks if the customer is registered in the araylist database, if so, the method returns its index in the arraylist),
 ```java
 public int findContact(String mail) {
         for (int i = 0; i < customersBase.size(); i++) {
@@ -235,7 +235,7 @@ public int findContact(String mail) {
     }
 ```
 
-- findDate (A method that checks whether a date is registered in the araylist database, whether the date is occupied),
+- **findDate** (A method that checks whether a date is registered in the araylist database, whether the date is occupied),
 ```java
 public DateOfTheEvent findDate(String month, int day) {
         DateOfTheEvent dateOfTheEvent = new DateOfTheEvent(day, month);
@@ -249,7 +249,7 @@ public DateOfTheEvent findDate(String month, int day) {
 
     }
 ```    
-- addCustomer (method, which will add an object from the Customer class to the appropriate ArrayList),
+- **addCustomer** (method, which will add an object from the Customer class to the appropriate ArrayList),
 ```java
 public void addCustomer(Customer customer) {
         if (findContact(customer.getEmail()) < 0) {
@@ -259,7 +259,7 @@ public void addCustomer(Customer customer) {
 
     }
 ```    
-- addTypeOfEvent (method, which will add an object from the TypeOfEvent class to the appropriate ArrayList),
+- **addTypeOfEvent** (method, which will add an object from the TypeOfEvent class to the appropriate ArrayList),
 ```java
 public void addTypeOfEvent(String nameOfEvent, int numberOfPeople, Customer customer) {
 
@@ -271,7 +271,7 @@ public void addTypeOfEvent(String nameOfEvent, int numberOfPeople, Customer cust
         }
     }
 ```    
-- addMenu (method, which will add an object from the Menu class to the appropriate ArrayList),
+- **addMenu** (method, which will add an object from the Menu class to the appropriate ArrayList),
 ```java
 public void addMenu(int option, Customer customer) {
         if (findContact(customer.getEmail()) >= 0) {
@@ -282,7 +282,7 @@ public void addMenu(int option, Customer customer) {
         }
     }
 ```    
-- addDate (method, which will add an object from the DateOfTheEvent class to the appropriate ArrayList),
+- **addDate** (method, which will add an object from the DateOfTheEvent class to the appropriate ArrayList),
 ```java
  public void addDate(DateOfTheEvent dateOfTheEvent, Customer customer) {
         if (findContact(customer.getEmail()) >= 0) {
@@ -293,7 +293,7 @@ public void addMenu(int option, Customer customer) {
         }
     }
 ```    
-- removeCustomerAndMenuAndTypeOfEvent (method that will remove the objects of the Customer, TypeOfEvent, Menu, DateOfTheEvent classes from the specific arraylists).
+- **removeCustomerAndMenuAndTypeOfEvent** (method that will remove the objects of the Customer, TypeOfEvent, Menu, DateOfTheEvent classes from the specific arraylists).
 ```java
 public void removeCustomerAndMenuAndTypeOfEvent(Customer customer) {
 
@@ -314,9 +314,9 @@ public void removeCustomerAndMenuAndTypeOfEvent(Customer customer) {
         System.out.println("The customer is not in the database\n");
     }
 ```    
-In the main class, methods have been created to allow the user to enter customer data.                                                                              
+In the **Main** class, methods have been created to allow the user to enter customer data.                                                                              
 Please find these methods below: 
-- addBaseOfCustomer (The method responsible for creating the database in a given year),
+- **addBaseOfCustomer** (The method responsible for creating the database in a given year),
 ```java
 private static CustomerDataBase addBaseOfCustomer(Validation validation) {
         System.out.println("Please enter the year for the database you are creating: ");
@@ -325,7 +325,7 @@ private static CustomerDataBase addBaseOfCustomer(Validation validation) {
         return new CustomerDataBase(validation.correctNumberOfYear(year));
     }
 ```
-- getCustomerName (method that uses methods from the scanner class and allows the user to enter the name of the client ).
+- **getCustomerName** (method that uses methods from the scanner class and allows the user to enter the name of the client ).
 ```java
 private static String getCustomerName(Validation validation) {
 
@@ -333,7 +333,7 @@ private static String getCustomerName(Validation validation) {
         return validation.emptyString(customerName);
     }
 ```
-- getEmail (method that allows the user to enter the email of the client).
+- **getEmail** (method that allows the user to enter the email of the client).
 ```java
 private static String getEmail(CustomerDataBase customerDataBase, Validation validation) {
         String email = scanner.nextLine();
@@ -343,7 +343,7 @@ private static String getEmail(CustomerDataBase customerDataBase, Validation val
         return validation.correctCustomerEmail(customerDataBase, email);
     }
 ```
-- getPhoneNumber (method that allows the user to enter the phone number of the client).
+- **getPhoneNumber** (method that allows the user to enter the phone number of the client).
 ```java
 private static String getPhoneNumber(Validation validation) {
         String phoneNumber = scanner.nextLine();
@@ -351,7 +351,7 @@ private static String getPhoneNumber(Validation validation) {
         return validation.correctPhoneNumber(phoneNumber);
     }
 ```    
-- getDay, getMonth (methods that allow the user to enter the day and month).
+- **getDay**, **getMonth** (methods that allow the user to enter the day and month).
 ```java
 public static int getDay(int upperBorder, Validation validation) {
         int day = scanner.nextInt();
@@ -365,7 +365,7 @@ public static int getDay(int upperBorder, Validation validation) {
         return validation.correctMonth(option);
     }
 ```
-- getTypeOfEvent (method that allows the user to enter the name of the type of event).
+- **getTypeOfEvent** (method that allows the user to enter the name of the type of event).
 ```java
 private static String getTypeOfEvent(Validation validation) {
 
@@ -373,7 +373,7 @@ private static String getTypeOfEvent(Validation validation) {
         return validation.emptyString(nameOfEvent);
     }
 ```
-- getOption (method that allows the user to enter the menu options that customer prefer).
+- **getOption** (method that allows the user to enter the menu options that customer prefer).
 ```java
 private static int getOption(Validation validation) {
         int option = scanner.nextInt();
@@ -382,10 +382,10 @@ private static int getOption(Validation validation) {
         return validation.correctMenuOption(option);
     }
 ```
-Validation methods in a separate Validation class has been applied to above methods.                                                        
+Validation methods in a separate **Validation** class has been applied to above methods.                                                        
 These methods have been created to protect against possible user error or exceeding the assumed ranges.     
 
-- correctCustomerEmail and wrongCustomerEmail (methods to check if a customer with a specific email is in the database and in case of discrepancy, re-enter the correct value).   
+- **correctCustomerEmail** and **wrongCustomerEmail** (methods to check if a customer with a specific email is in the database and in case of discrepancy, re-enter the correct value).   
 
 ```java
 public String correctCustomerEmail(CustomerDataBase customerDataBase, String email) {
@@ -409,7 +409,7 @@ public String correctCustomerEmail(CustomerDataBase customerDataBase, String ema
     }
  ```
  
- - correctMenuOption, correctMonth, correctDay (methods that check if the entered data for menu options, day and month are within the assumed range).
+ - **correctMenuOption**, **correctMonth**, **correctDay** (methods that check if the entered data for menu options, day and month are within the assumed range).
  ```java
  public int correctMenuOption(int option) {
         while (option < 1 || option > 3) {
@@ -497,7 +497,7 @@ public String correctCustomerEmail(CustomerDataBase customerDataBase, String ema
         return day;
     }
 ```
-- correctDayScope (method that assigns the appropriate number of days to a specific month).
+- **correctDayScope** (method that assigns the appropriate number of days to a specific month).
 
 ```java
 public int correctDayScope(String month) {
@@ -530,7 +530,7 @@ public int correctDayScope(String month) {
 
     }
 ```
-- correctDate (A method to check if a date is already taken).
+- **correctDate** (A method to check if a date is already taken).
 
 ```java
 public DateOfTheEvent correctDate(CustomerDataBase customerDataBase, Validation validation, String month, int day) {
@@ -549,20 +549,20 @@ public DateOfTheEvent correctDate(CustomerDataBase customerDataBase, Validation 
         return customerDataBase.findDate(month, day);
     }
 ```
-- currentYear (A method that gives the acrual year).
+- **currentYear** (A method that gives the acrual year).
 ```java
 public int currentYear() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.YEAR);
     }
 ```
-- leapYear (A method that checks if the year is leap year).
+- **leapYear** (A method that checks if the year is leap year).
 ```java
 public boolean leapYear(int year) {
         return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 ```    
-- correctPhoneNumber (A method that verifies that a number has exactly 9 digits).
+- **correctPhoneNumber** (A method that verifies that a number has exactly 9 digits).
 ```java
 public String correctPhoneNumber(String phoneNumber) {
         while (phoneNumber.length() != 9) {
@@ -573,7 +573,7 @@ public String correctPhoneNumber(String phoneNumber) {
         return phoneNumber;
     }
 ```    
-- emptyString (method that checks if the entered value is not an empty string).
+- **emptyString** (method that checks if the entered value is not an empty string).
 ```java
 public String emptyString(String nonEmptyString) {
         while (nonEmptyString.equals("")) {
@@ -584,7 +584,7 @@ public String emptyString(String nonEmptyString) {
     }
 ```
 
-- lowerBorderNumberOfPeople, upperBorderNumberOfPeople (methods that allow you to determine the upper and lower limits for the number of people at an event).
+- **lowerBorderNumberOfPeople**, **upperBorderNumberOfPeople** (methods that allow you to determine the upper and lower limits for the number of people at an event).
 ```java
 private static int lowerBorderNumberOfPeople() {
         System.out.println("Please enter a new lower limit below: ");
@@ -607,7 +607,7 @@ private static int lowerBorderNumberOfPeople() {
         return upperBorder;
     }
 ```    
-- settingProperNumberOfPeopleScope (method that allows you to set a new range for the number of people at an event).
+- **settingProperNumberOfPeopleScope** (method that allows you to set a new range for the number of people at an event).
 ```java
 public int[] settingProperNumberOfPeopleScope(Validation validation) {
         int[] outputArray = new int[2];
@@ -636,7 +636,7 @@ public int[] settingProperNumberOfPeopleScope(Validation validation) {
         return outputArray;
     }
 ```
-- getNumberOfPeople (method that checks whether the data entered is within range in terms of the number of people at the event).
+- **getNumberOfPeople** (method that checks whether the data entered is within range in terms of the number of people at the event).
 ```java
 public int getNumberOfPeople(int[] inputArray) {
         int lowerBorder = inputArray[0];
@@ -653,8 +653,8 @@ public int getNumberOfPeople(int[] inputArray) {
         return numberOfPeople;
     }
  ```
- In the main class, the most important methods include:
-- printMenu (method that prints the customer service menu).
+ In the **Main** class, the most important methods include:
+- **printMenu** (method that prints the customer service menu).
 ```java
  private static void printMenu() {
         System.out.println("""
@@ -669,7 +669,7 @@ public int getNumberOfPeople(int[] inputArray) {
                  """);
     }
 ```
-- chooseOption (method that allows the user to choose which method he wants to use).
+- **chooseOption** (method that allows the user to choose which method he wants to use).
 ```java
 private static void chooseOption() {
         int option;
@@ -707,7 +707,7 @@ private static void chooseOption() {
         }
     }
 ```
-- addNewCustomer, removeCustomer,updateCustomer (methods that allow the user to add, update or remove a client from the database).
+- **addNewCustomer**, **removeCustomer**,**updateCustomer** (methods that allow the user to add, update or remove a client from the database).
 ```java
 private static void addNewCustomer(CustomerDataBase baseOfCustomer, Validation validation) {
         System.out.println("Please enter the customer's email");
@@ -798,7 +798,7 @@ private static void addNewCustomer(CustomerDataBase baseOfCustomer, Validation v
 
     }
 ```
-- quotation (A method that makes a quote for a specific customer).
+- **quotation** (A method that makes a quote for a specific customer).
 ```java
 public static void quotation(CustomerDataBase baseOfCustomer, Validation validation) {
         System.out.println("In order to make quotation please enter customer's e-mail below: ");
@@ -816,7 +816,7 @@ public static void quotation(CustomerDataBase baseOfCustomer, Validation validat
         System.out.println("Total cost for " + customer.getName() + " with e-mail: " + customer.getEmail() + " is " + Math.round(quotation) + " zloty");
     }
 ```
-- printCustomerBase (A method that prints all the information collected in the customer database).
+- **printCustomerBase** (A method that prints all the information collected in the customer database).
 ```java
 private static void printCustomerBase(CustomerDataBase baseOfCustomer) {
         if (baseOfCustomer.getCustomersBase().size() == 0) {
@@ -838,28 +838,28 @@ private static void printCustomerBase(CustomerDataBase baseOfCustomer) {
 # Running application
 
 ## Prerequisite
-If you want to run the application, java version 19.01 or later is required.                                             
+If you want to run the application, **java version 19.01** or later is required.                                             
 Please find below link to a tutorial on how to properly install the above java version:                                                 
 https://www.youtube.com/watch?v=vFBW6nMcVlU                                                                   
 To download, follow the link below:                                                                                                                                                                      
 https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html                                                    
 
 ## Launch process
-Download a file named launcher.jar from the CustomerServiceProject repository located on GitHub.                                                
+Download a file named **launcher.jar** from the **CustomerServiceProject** repository located on GitHub.                                                
 
 ![carbon](https://user-images.githubusercontent.com/116492421/213926408-5ce4521e-b109-4c3c-9d65-56c9de0da732.png)
 
 
 Then save it to a specific location on your computer.                                            
 On my computer, the file is located in:                                                    
-C:\Users\Robert\IdeaProjects\CustomerServiceProject\src
+**C:\Users\Robert\IdeaProjects\CustomerServiceProject\src**
 
-Open the console by typing cmd at the command line.                                            
+Open the console by typing **cmd** at the command line.                                            
 
 ![image](https://user-images.githubusercontent.com/116492421/213838763-a28abb59-9ec9-4402-9801-344a4e5116b1.png)
 
 In the next step, type the following command in the console:                                                   
-java -jar launcher.jar                                                                   
+**java -jar launcher.jar**                                                                   
 After typing the command, the program should start in the console.                                              
 
 ![firstImage](https://user-images.githubusercontent.com/116492421/213927248-3f573419-7621-43d8-b3b9-cbbcb1b379be.PNG)
@@ -868,30 +868,31 @@ After typing the command, the program should start in the console.
 
 ## Prerequisite                                                     
 If you want to develop the application necessary will be                                                
--	java version 19.01,
--	IntelliJ IDEA Community Edition 2022.1*.
+-	**java version 19.01**,
+-	**IntelliJ IDEA Community Edition 2022.1**.
 
 
 Please find below link to a tutorial on how to properly install the above IntelliJ IDEA version:                                              
-https://www.youtube.com/watch?v=S8cVBE4euus                                                          
+**https://www.youtube.com/watch?v=S8cVBE4euus**                                                        
 To download, follow the link below:                                                         
-https://www.jetbrains.com/idea/download/#section=windows                                                     
+**https://www.jetbrains.com/idea/download/#section=windows**                                                     
 
 ![thirdImage](https://user-images.githubusercontent.com/116492421/213839484-02317d47-3c3c-4e1c-aec6-fa9067d12a4c.PNG)
 
 
 ## Project Openning
 
-Download the zip folder from the DateZoneProject repository with the project files.                                                           
+Download the zip folder from the **CustomerServiceProject** repository with the project files.                                                           
 
-![image](https://user-images.githubusercontent.com/116492421/213839520-4df8eea9-c05b-41ef-9598-f27baecc08c6.png)
+![carbon](https://user-images.githubusercontent.com/116492421/213927599-4fd298ea-0ec3-4033-998b-e72d260b34bf.png)
 
 
 Then save and extract project files to a specific location on your computer.                                                       
 On my computer, the file is located in:                                                                        
-C:\NewProject                                                                                       
+**C:\NewProject**                                                                                       
 
-![carbon](https://user-images.githubusercontent.com/116492421/213839561-8355aa13-bd94-4edc-8490-91b0c31a145f.png)
+
+![firstImage](https://user-images.githubusercontent.com/116492421/213927648-ee263387-a221-4df1-adde-cef7cb3e3f27.PNG)
 
 
 The next step is to click open in IntelliJ IDEA.                                                               
@@ -901,11 +902,11 @@ The next step is to click open in IntelliJ IDEA.
 
 Then select the appropriate folder with the project.                                                                        
 
-![carbon](https://user-images.githubusercontent.com/116492421/213839609-4ae90b8a-619c-4111-a6a5-94ba9d86db7b.png)
+![secondImage](https://user-images.githubusercontent.com/116492421/213927665-73d847e2-1019-4eec-9297-87cd2a3bcd53.PNG)
 
 
 After selecting the appropriate folder, a project should open.                                                                            
 We can start to make changes.                                                                                    
 
 
-![carbon](https://user-images.githubusercontent.com/116492421/213839656-028c5911-c952-468a-af6b-56b9a558867f.png)
+![thirdImage](https://user-images.githubusercontent.com/116492421/213927674-6f678caa-8c04-4190-869c-1a62eb3f075d.PNG)
