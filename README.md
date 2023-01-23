@@ -1,6 +1,6 @@
 ![carbon](https://user-images.githubusercontent.com/116492421/213929391-882c40f0-6b0d-4e1e-b2a5-9c17f21aeb50.png)
 # Introduction
-In this project I have wanted to show that knowing the basics of object-oriented programming, we are able to create a simple console application for customer service.
+In this project I have wanted to show that knowing the basics of object-oriented programming, we are able to create a simple console application for customer service.    
 The application was created with the use:
 
 - loops,
@@ -15,7 +15,8 @@ The application was created with the use:
 
 # Description
 The application is designed for employees of the wedding hall and enables the user to add a client to an Arraylist-based database.              
-With the application, we are able to enter and extract customer data quickly and efficiently.                                
+With the application, we are able to enter and extract customer data quickly and efficiently.    
+
 Once entered, the database will contain such information as:
  - First and last name,
 - phone number,
